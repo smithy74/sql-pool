@@ -1,4 +1,4 @@
-CREATE INDEX IF NOT EXISTS idx_person_order_multi ON person_order (person_id, menu_id);
+CREATE INDEX IF NOT EXISTS idx_person_order_multi ON person_order (person_id, menu_id, order_date);
 SET enable_seqscan = OFF;
 EXPLAIN ANALYZE
 SELECT person_id,
