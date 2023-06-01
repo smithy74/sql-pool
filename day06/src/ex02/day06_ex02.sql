@@ -1,7 +1,7 @@
 SELECT person.name AS person_name,
     menu.pizza_name,
     menu.price,
-    (menu.price / 100 * (100 - person_discounts.discount)) AS discount_price,
+    (menu.price / 100 * (100 - person_discounts.discount))::FLOAT AS discount_price,
     pizzeria.name as pizzeria_name
 FROM person_order
     JOIN menu ON person_order.menu_id = menu.id
