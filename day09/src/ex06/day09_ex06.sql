@@ -3,7 +3,7 @@ CREATE OR REPLACE FUNCTION fnc_person_visits_and_eats_on_date(
         IN pprice numeric DEFAULT 500,
         IN pdate date DEFAULT '2022-01-08'
     ) RETURNS TABLE (name varchar) AS $$
-SELECT DISTINCT piz.name AS pizzeria_name
+SELECT piz.name AS pizzeria_name
 FROM person_visits pv
     JOIN person p ON pv.person_id = p.id
     JOIN menu m ON pv.pizzeria_id = m.pizzeria_id

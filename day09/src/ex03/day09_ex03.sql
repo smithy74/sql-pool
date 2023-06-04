@@ -4,6 +4,7 @@ DROP TRIGGER IF EXISTS trg_person_delete_audit ON person;
 DROP FUNCTION IF EXISTS fnc_trg_person_insert_audit();
 DROP FUNCTION IF EXISTS fnc_trg_person_update_audit();
 DROP FUNCTION IF EXISTS fnc_trg_person_delete_audit();
+TRUNCATE TABLE person_audit;
 CREATE FUNCTION fnc_trg_person_audit () RETURNS trigger AS $$ BEGIN IF (TG_OP = 'INSERT') THEN
 INSERT INTO person_audit (type_event, row_id, name, age, gender, address)
 VALUES (
@@ -13,7 +14,7 @@ VALUES (
         NEW."age",
         NEW."gender",
         NEW."address"
-    );
+    )
 ELSIF (TG_OP = 'UPDATE') THEN
 INSERT INTO person_audit (type_event, row_id, name, age, gender, address)
 VALUES (
@@ -23,7 +24,7 @@ VALUES (
         OLD."age",
         OLD."gender",
         OLD."address"
-    );
+    )
 ELSIF (TG_OP = 'DELETE') THEN
 INSERT INTO person_audit (type_event, row_id, name, age, gender, address)
 VALUES (
@@ -33,7 +34,7 @@ VALUES (
         OLD."age",
         OLD."gender",
         OLD."address"
-    );
+    )
 END IF;
 RETURN NULL;
 END;
